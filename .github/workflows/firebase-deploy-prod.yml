@@ -26,16 +26,11 @@ jobs:
       - name: Install Firebase CLI
         run: npm install -g firebase-tools
 
-      - name: Set up Google Cloud authentication
-        run: |
-          echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" | sed 's/\\n/\
-/g' > $HOME/gcloud.json
-          cat $HOME/gcloud.json
+      - name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v0'
+        with:
+          credentials_json: '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}'
 
       - name: Deploy to Firebase Hosting
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS: $HOME/gcloud.json
         run: |
-          gcloud auth activate-service-account --key-file=$HOME/gcloud.json
-          gcloud --quiet config set project my-test-8cd41
           firebase deploy --only hosting --project my-test-8cd41 --debug
