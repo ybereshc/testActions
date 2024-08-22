@@ -1,38 +1,38 @@
 {
-  "functions": {
-	"source": "firebase-functions",
-	"runtime": "nodejs18"
-  },
-  "hosting": [
-    {
-      "public": "build",
-      "target": "dev",
-      "ignore": [
-        "firebase.json",
-        "**/.*",
-        "**/node_modules/**"
-      ],
-      "rewrites": [
-        {
-          "source": "**",
-          "function": "api"
-        }
-      ]
-    },
-    {
-      "public": "build",
-      "target": "prod",
-      "ignore": [
-        "firebase.json",
-        "**/.*",
-        "**/node_modules/**"
-      ],
-      "rewrites": [
-        {
-          "source": "**",
-          "function": "api"
-        }
-      ]
-    }
-  ]
+	"functions": {
+		"source": "firebase-functions",
+		"runtime": "nodejs18"
+	},
+	"hosting": [
+		{
+			"public": "build",
+			"target": "dev",
+			"ignore": [
+				"firebase.json",
+				"**/.*",
+				"**/node_modules/**"
+			],
+			"rewrites": [
+				{
+					"source": "**",
+					"destination": "index.html"
+				}
+			]
+		},
+		{
+			"public": "build",
+			"target": "prod",
+			"ignore": [
+				"firebase.json",
+				"**/.*",
+				"**/node_modules/**"
+			],
+			"rewrites": [
+				{
+					"source": "**",
+					"destination": "index.html"
+				}
+			]
+		}
+	]
 }

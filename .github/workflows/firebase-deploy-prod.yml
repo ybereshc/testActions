@@ -19,13 +19,15 @@ jobs:
       #     node-version: '16'  # Выберите версию Node.js, которая вам нужна
 
       - name: Create index.html
+        env:
+          NODE_ENV: prod
         run: node index.js
 
       - name: Set up Google Cloud authentication
         run: echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" > $HOME/gcloud.json
 
       - name: Deploy to Firebase Hosting
-        run: |
-          firebase deploy --only hosting --project my-test-8cd41 --only hosting:prod
         env:
           GOOGLE_APPLICATION_CREDENTIALS: $HOME/gcloud.json
+        run: |
+          firebase deploy --only hosting --project my-test-8cd41 --only hosting:prod
