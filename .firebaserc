@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "my-test-8cd41": {
+      "hosting": {
+        "dev": [
+          "my-test-dev"
+        ],
+        "prod": [
+          "my-test-prod"
+        ]
+      }
+    }
+  }
+}
