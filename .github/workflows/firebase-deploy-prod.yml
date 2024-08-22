@@ -26,10 +26,10 @@ jobs:
       - name: Install Firebase CLI
         run: npm install -g firebase-tools
 
-      - name: 'Authenticate to Google Cloud'
-        uses: 'google-github-actions/auth@v0'
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2.1.4
         with:
-          credentials_json: '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}'
+          credentials_json: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
 
       - name: Deploy to Firebase Hosting
         run: |
