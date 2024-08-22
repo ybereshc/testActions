@@ -23,17 +23,16 @@ jobs:
           NODE_ENV: prod
         run: node index.js
 
-      # - name: Set up Google Cloud authentication
-      #   run: echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" > $HOME/gcloud.json
-
-      # - name: Export GOOGLE_APPLICATION_CREDENTIALS
-      #   run: export GOOGLE_APPLICATION_CREDENTIALS=$HOME/gcloud.json
-
       - name: Install Firebase CLI
         run: npm install -g firebase-tools
 
+      - name: Set up Google Cloud authentication
+        run: echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" > $HOME/gcloud.json
+
       - name: Deploy to Firebase Hosting
         env:
-          GOOGLE_APPLICATION_CREDENTIALS: ./my-test-8cd41-b2d534e34c1e.json
+          GOOGLE_APPLICATION_CREDENTIALS: $HOME/gcloud.json
         run: |
+          gcloud auth activate-service-account --key-file=$HOME/gcloud.json
+          gcloud --quiet config set project my-test-8cd41
           firebase deploy --only hosting --project my-test-8cd41 --debug
