@@ -28,7 +28,8 @@ jobs:
 
       - name: Set up Google Cloud authentication
         run: |
-          echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" | tr -d '\r' > $HOME/gcloud.json
+          echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" | sed 's/\\n/\
+/g' > $HOME/gcloud.json
           cat $HOME/gcloud.json
 
       - name: Deploy to Firebase Hosting
